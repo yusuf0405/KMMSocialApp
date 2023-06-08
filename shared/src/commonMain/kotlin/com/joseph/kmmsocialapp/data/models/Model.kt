@@ -1,28 +1,28 @@
-package com.joseph.kmmsocialapp.data
+package com.joseph.kmmsocialapp.data.models
 
 import kotlinx.serialization.Serializable
 
-@kotlinx.serialization.Serializable
-data class SignUpParams(
+@Serializable
+internal data class SignUpRequest(
     val name: String,
     val email: String,
     val password: String,
 )
 
-@kotlinx.serialization.Serializable
-data class SignInParams(
+@Serializable
+internal data class SignInRequest(
     val email: String,
     val password: String,
 )
 
-@kotlinx.serialization.Serializable
-data class AuthResponse(
+@Serializable
+internal data class AuthResponse(
     val data: AuthResponseData? = null,
     val errorMessage: String? = null
 )
 
 @Serializable
-data class AuthResponseData(
+internal data class AuthResponseData(
     val id: Int,
     val name: String,
     val bio: String,
