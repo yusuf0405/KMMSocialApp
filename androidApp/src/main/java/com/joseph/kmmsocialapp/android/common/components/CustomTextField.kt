@@ -24,8 +24,8 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import com.joseph.kmmsocialapp.android.R
-import com.joseph.kmmsocialapp.android.common.Gray
-import com.joseph.kmmsocialapp.android.common.SocialAppTheme
+import com.joseph.kmmsocialapp.android.common.theme.Gray
+import com.joseph.kmmsocialapp.android.common.theme.SocialAppTheme
 
 @Preview
 @Composable
@@ -74,7 +74,7 @@ fun CustomTextField(
                 PasswordEyeIcon(isPasswordVisible = isPasswordVisible) {
                     isPasswordVisible = !isPasswordVisible
                 }
-            } else null
+            }
         },
         visualTransformation = if (isPasswordTextField) {
             if (isPasswordVisible) VisualTransformation.None

@@ -1,6 +1,5 @@
 package com.joseph.kmmsocialapp.android.common.components
 
-import android.service.autofill.OnClickAction
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -14,8 +13,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.joseph.kmmsocialapp.android.R
-import com.joseph.kmmsocialapp.android.common.ButtonHeight
-import com.joseph.kmmsocialapp.android.common.SocialAppTheme
+import com.joseph.kmmsocialapp.android.common.theme.ButtonHeight
+import com.joseph.kmmsocialapp.android.common.theme.SocialAppTheme
 
 @Preview
 @Composable

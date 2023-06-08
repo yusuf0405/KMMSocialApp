@@ -1,4 +1,4 @@
-package com.joseph.kmmsocialapp.android.common
+package com.joseph.kmmsocialapp.android.common.theme
 
 import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
