@@ -24,7 +24,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background,
                 ) {
-                    val token =  viewModel.authState.collectAsStateWithLifecycle(initialValue = null)
+                    val token = viewModel.authState.collectAsStateWithLifecycle(initialValue = null)
                     SocialApp(
                         token = token.value
                     )

@@ -56,22 +56,18 @@ kotlin {
             }
         }
 
-
         val androidUnitTest by getting
         val iosX64Main by getting
         val iosArm64Main by getting
         val iosSimulatorArm64Main by getting
-
-
         val iosMain by creating {
+            dependencies {
+                implementation("io.ktor:ktor-client-darwin:$ktorVersion")
+            }
             dependsOn(commonMain)
             iosX64Main.dependsOn(this)
             iosArm64Main.dependsOn(this)
             iosSimulatorArm64Main.dependsOn(this)
-
-            dependencies{
-                implementation("io.ktor:ktor-client-darwin:$ktorVersion")
-            }
         }
         val iosX64Test by getting
         val iosArm64Test by getting

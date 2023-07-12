@@ -16,6 +16,7 @@ android {
         versionCode = 1
         versionName = "1.0"
     }
+
     buildFeatures {
         compose = true
     }
@@ -67,5 +68,7 @@ dependencies {
 
     implementation("androidx.lifecycle:lifecycle-runtime-compose:2.6.1")
     implementation ("com.google.accompanist:accompanist-systemuicontroller:0.28.0")
+
+    implementation("io.coil-kt:coil-compose:2.4.0")
 
 }

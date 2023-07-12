@@ -29,6 +29,7 @@ import com.joseph.kmmsocialapp.android.common.theme.SmallElevation
 import com.joseph.kmmsocialapp.android.common.theme.SocialAppTheme
 import com.joseph.kmmsocialapp.android.destinations.HomeDestination
 import com.joseph.kmmsocialapp.android.destinations.LoginDestination
+import com.joseph.kmmsocialapp.android.destinations.PostDetailDestination
 import com.joseph.kmmsocialapp.android.destinations.SignUpDestination
 import com.ramcosta.composedestinations.utils.currentDestinationAsState
 
@@ -83,7 +84,7 @@ fun AppBar(
                     ) {
                         IconButton(
                             onClick = {
-
+                                navHostController.navigateUp()
                             }
                         ) {
                             Icon(
@@ -104,14 +105,19 @@ fun AppBar(
 private fun getAppBarTitle(currentDestinationRoute: String?): Int {
     return when (currentDestinationRoute) {
         LoginDestination.route -> R.string.login_destination_title
-        HomeDestination.route -> R.string.app_name
+        HomeDestination.route -> R.string.home_destination_title
+        PostDetailDestination.route -> R.string.post_detail_destination_title
         SignUpDestination.route -> R.string.signup_destination_title
         else -> R.string.no_destination_title
     }
 }
 
 private fun shouldShowNavigationIcon(currentDestinationRoute: String?): Boolean {
-    return false
+    return !(
+            currentDestinationRoute == LoginDestination.route ||
+                    currentDestinationRoute == SignUpDestination.route ||
+                    currentDestinationRoute == HomeDestination.route
+            )
 }
 
 

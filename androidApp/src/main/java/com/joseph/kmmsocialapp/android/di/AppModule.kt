@@ -8,6 +8,7 @@ import com.joseph.kmmsocialapp.android.auth.sign.SignUpViewModel
 import com.joseph.kmmsocialapp.android.common.datastore.UserSettingsSerializer
 import com.joseph.kmmsocialapp.android.home.HomeViewModel
 import com.joseph.kmmsocialapp.android.mappers.AuthResultDataToUserPreferencesMapper
+import com.joseph.kmmsocialapp.android.post.PostDetailScreenViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -30,6 +31,7 @@ val appModule = module {
     }
 
     viewModel { HomeViewModel() }
+    viewModel { PostDetailScreenViewModel() }
     viewModel {
         MainActivityViewModel(
             dataStore = get()
