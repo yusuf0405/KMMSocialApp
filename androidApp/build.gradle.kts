@@ -49,25 +49,30 @@ android {
 }
 
 dependencies {
+    val compose_version = "1.4.3"
     implementation(project(":shared"))
-    implementation("androidx.compose.ui:ui:1.4.3")
-    implementation("androidx.compose.ui:ui-tooling:1.4.3")
-    implementation("androidx.compose.ui:ui-tooling-preview:1.4.3")
-    implementation("androidx.compose.foundation:foundation:1.4.3")
-    implementation("androidx.compose.material:material:1.4.3")
+    implementation("androidx.compose.ui:ui:$compose_version")
+    implementation("androidx.compose.ui:ui-tooling:$compose_version")
+    implementation("androidx.compose.ui:ui-tooling-preview:$compose_version")
+    implementation("androidx.compose.foundation:foundation:$compose_version")
+    implementation("androidx.compose.material:material:$compose_version")
     implementation("androidx.activity:activity-compose:1.7.1")
+    implementation("androidx.compose.animation:animation-graphics:$compose_version")
+    implementation("androidx.appcompat:appcompat-resources:1.3.0")
 
     implementation("io.github.raamcosta.compose-destinations:core:1.8.38-beta")
     ksp("io.github.raamcosta.compose-destinations:ksp:1.8.38-beta")
+    implementation("io.insert-koin:koin-androidx-compose:3.4.1")
+    implementation("com.google.accompanist:accompanist-systemuicontroller:0.28.0")
+
+    implementation("com.google.accompanist:accompanist-pager:0.13.0")
+    implementation("com.google.accompanist:accompanist-pager-indicators:0.13.0")
 
     implementation("androidx.core:core-splashscreen:1.0.0")
 
-    implementation ("androidx.datastore:datastore-preferences:1.0.0")
-
-    implementation ("io.insert-koin:koin-androidx-compose:3.4.1")
+    implementation("androidx.datastore:datastore-preferences:1.0.0")
 
     implementation("androidx.lifecycle:lifecycle-runtime-compose:2.6.1")
-    implementation ("com.google.accompanist:accompanist-systemuicontroller:0.28.0")
 
     implementation("io.coil-kt:coil-compose:2.4.0")
 

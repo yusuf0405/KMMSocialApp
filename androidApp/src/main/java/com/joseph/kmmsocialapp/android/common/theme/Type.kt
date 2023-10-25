@@ -1,5 +1,6 @@
 package com.joseph.kmmsocialapp.android.common.theme
 
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
@@ -22,7 +23,7 @@ val Typography = Typography(
     h6 = TextStyle(
         fontFamily = Lexend,
         fontWeight = FontWeight.Bold,
-        fontSize = 21.sp
+        fontSize = 21.sp,
     ),
     subtitle1 = TextStyle(
         fontFamily = Lexend,

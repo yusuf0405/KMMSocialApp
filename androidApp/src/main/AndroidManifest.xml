@@ -3,18 +3,27 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <application
-        android:name=".SocialApplication"
+        android:name=".presentation.app.SocialApplication"
         android:allowBackup="false"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
         <activity
-            android:name=".MainActivity"
+            android:name=".presentation.app.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <provider
+            android:name=".common.provider.file.ComposeFileProvider"
+            android:authorities="com.joseph.kmmsocialapp.android.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/filepaths" />
+        </provider>
     </application>
 </manifest> 

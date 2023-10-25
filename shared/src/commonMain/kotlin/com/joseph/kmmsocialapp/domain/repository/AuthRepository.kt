@@ -7,6 +7,7 @@ internal interface AuthRepository {
 
     suspend fun signUp(
         name: String,
+        lastName: String,
         email: String,
         password: String,
     ): Result<AuthResultData>

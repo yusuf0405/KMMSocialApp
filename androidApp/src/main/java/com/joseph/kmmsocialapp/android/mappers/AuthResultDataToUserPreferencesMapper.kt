@@ -12,8 +12,6 @@ class AuthResultDataToUserPreferencesMapper : Mapper<AuthResultData, UserPrefere
             bio = bio,
             avatar = avatar,
             token = token,
-            followersCount = followersCount,
-            followingCount = followingCount
         )
     }
 }

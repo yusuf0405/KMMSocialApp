@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <color name="white">#F5F5FA</color>
+    <color name="black_smoke">#1D2023</color>
+    <color name="black">#FF000000</color>
+    <color name="gray_light">#EEEEEE</color>
+    <color name="gray_base">#B9B9B9</color>
+    <color name="gray_dark">#3D3D3D</color>
+
+</resources>

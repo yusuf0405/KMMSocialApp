@@ -1,6 +1,6 @@
 package com.joseph.kmmsocialapp.data.repository
 
-import com.joseph.kmmsocialapp.common.util.DispatcherProvider
+import com.joseph.kmmsocialapp.common.util.coroutines.DispatcherProvider
 import com.joseph.kmmsocialapp.common.util.Result
 import com.joseph.kmmsocialapp.data.mappers.AuthResponseDataToAuthResultDataMapper
 import com.joseph.kmmsocialapp.data.models.SignInRequest
@@ -10,16 +10,18 @@ import com.joseph.kmmsocialapp.domain.models.AuthResultData
 import com.joseph.kmmsocialapp.domain.repository.AuthRepository
 import kotlinx.coroutines.withContext
 
+val defaultErrorMessage = "Oops, we could not send your request, try later!"
+
 internal class AuthRepositoryImpl(
     private val authService: AuthService,
     private val dispatcherProvider: DispatcherProvider,
     private val authResponseDataToAuthResultDataMapper: AuthResponseDataToAuthResultDataMapper
 ) : AuthRepository {
 
-    private val defaultErrorMessage = "Oops, we could not send your request, try later!"
 
     override suspend fun signUp(
         name: String,
+        lastName: String,
         email: String,
         password: String
     ): Result<AuthResultData> {
@@ -28,7 +30,8 @@ internal class AuthRepositoryImpl(
                 val request = SignUpRequest(
                     email = email,
                     password = password,
-                    name = name
+                    name = name,
+                    lastName = lastName
                 )
                 val authResponse = authService.signUp(request)
                 if (authResponse.data == null) {

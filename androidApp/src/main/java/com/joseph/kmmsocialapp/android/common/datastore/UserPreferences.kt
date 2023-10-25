@@ -7,12 +7,22 @@ import kotlinx.serialization.Serializable
 data class UserPreferences(
     val id: Int = -1,
     val name: String = String(),
-    val bio: String = String(),
+    val lastName: String = String(),
+    val bio: String? = null,
     val avatar: String? = null,
     val token: String = String(),
-    val followersCount: Int = 0,
-    val followingCount: Int = 0,
-)
+) {
+
+    companion object {
+        val unknown = UserPreferences(
+            id = -1,
+            name = String(),
+            bio = String(),
+            avatar = null,
+            token = String(),
+        )
+    }
+}
 
 fun UserPreferences.toAuthResultData(): AuthResultData {
     return AuthResultData(
@@ -21,7 +31,6 @@ fun UserPreferences.toAuthResultData(): AuthResultData {
         bio = bio,
         avatar = avatar,
         token = token,
-        followersCount = followersCount,
-        followingCount = followingCount
+        lastName = lastName
     )
 }

@@ -10,11 +10,10 @@ internal class AuthResponseDataToAuthResultDataMapper : Mapper<AuthResponseData,
         AuthResultData(
             id = id,
             name = name,
+            lastName = lastName,
             bio = bio,
             avatar = avatar,
             token = token,
-            followersCount = followersCount,
-            followingCount = followingCount
         )
     }
 }

@@ -12,6 +12,7 @@ class SignUpUseCase : KoinComponent {
 
     suspend operator fun invoke(
         name: String,
+        lastName: String,
         email: String,
         password: String,
     ): Result<AuthResultData> {
@@ -19,6 +20,12 @@ class SignUpUseCase : KoinComponent {
         if (name.isBlank() || name.length < 3) {
             return Result.Error(
                 message = "Invalid name"
+            )
+        }
+
+        if (lastName.isBlank() || lastName.length < 3) {
+            return Result.Error(
+                message = "Invalid last name"
             )
         }
 
@@ -34,7 +41,12 @@ class SignUpUseCase : KoinComponent {
             )
         }
 
-        return repository.signUp(email = email, name = name, password = password)
+        return repository.signUp(
+            email = email,
+            name = name,
+            password = password,
+            lastName = lastName
+        )
     }
 }
 
