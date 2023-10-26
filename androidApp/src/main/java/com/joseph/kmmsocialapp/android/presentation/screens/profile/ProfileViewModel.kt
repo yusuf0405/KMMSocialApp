@@ -58,7 +58,9 @@ class ProfileViewModel(
                     isCurrentUser = userDomain.id == userId
                 ) else profileUiState.copy(
                     isLoading = true,
-                    errorMessage = response.message ?: defaultErrorMessage
+                    errorMessage = response.message ?: defaultErrorMessage,
+                    // Временно для тестов
+                    userDetail = UserDetail.unknown
                 )
 
                 _profileUiStateFlow.tryEmit(profileUiState)

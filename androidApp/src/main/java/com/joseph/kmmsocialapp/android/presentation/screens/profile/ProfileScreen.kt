@@ -75,67 +75,73 @@ fun ProfileScreen(
     ) {
         val screenHeight = maxHeight
         val scrollState = rememberScrollState()
-        if (uiState.isLoading.not()) {
-            UserPersonalInfo(uiState.userDetail, uiState.isCurrentUser, scrollState)
-        } else {
-            CircularProgressIndicator()
-        }
-        if (uiState.tabs.isNotEmpty()) {
-            Column(modifier = Modifier.height(screenHeight)) {
-                TabRow(
-                    modifier = Modifier.fillMaxWidth(),
-                    backgroundColor = MaterialTheme.colors.background,
-                    contentColor = MaterialTheme.colors.background,
-                    selectedTabIndex = pagerState.currentPage,
-                    indicator = { tabPositions ->
-                        TabRowDefaults.Indicator(
-                            modifier = Modifier
-                                .tabIndicatorOffset(tabPositions[pagerState.currentPage])
-                                .clip(RoundedCornerShape(4.dp)),
-                            height = 3.dp,
-                            color = MaterialTheme.colors.primary
-                        )
-                    }
-                ) {
-                    profileTabs.forEachIndexed { index, tab ->
-                        Tab(
-                            text = {
-                                Text(
-                                    text = stringResource(id = tab.titleId),
-                                    style = MaterialTheme.typography.body2,
-                                    color = MaterialTheme.colors.onBackground
-                                )
-                            },
-                            selected = pagerState.currentPage == index,
-                            onClick = {
-                                coroutineScope.launch {
-                                    pagerState.animateScrollToPage(index)
-                                }
-                            }
-                        )
-                    }
-                }
-
-                HorizontalPager(
-                    state = pagerState,
-                    pageCount = profileTabs.size,
-                    modifier = Modifier
-                        .fillMaxHeight()
-                        .nestedScroll(remember {
-                            object : NestedScrollConnection {
-                                override fun onPreScroll(
-                                    available: Offset,
-                                    source: NestedScrollSource
-                                ): Offset {
-                                    return if (available.y > 0) Offset.Zero else Offset(
-                                        x = 0f,
-                                        y = -scrollState.dispatchRawDelta(-available.y)
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .verticalScroll(state = scrollState)
+        ) {
+            if (uiState.isLoading.not()) {
+                UserPersonalInfo(uiState.userDetail, uiState.isCurrentUser)
+            } else {
+                CircularProgressIndicator()
+            }
+            if (uiState.tabs.isNotEmpty()) {
+                Column(modifier = Modifier.height(screenHeight)) {
+                    TabRow(
+                        modifier = Modifier.fillMaxWidth(),
+                        backgroundColor = MaterialTheme.colors.background,
+                        contentColor = MaterialTheme.colors.background,
+                        selectedTabIndex = pagerState.currentPage,
+                        indicator = { tabPositions ->
+                            TabRowDefaults.Indicator(
+                                modifier = Modifier
+                                    .tabIndicatorOffset(tabPositions[pagerState.currentPage])
+                                    .clip(RoundedCornerShape(4.dp)),
+                                height = 3.dp,
+                                color = MaterialTheme.colors.primary
+                            )
+                        }
+                    ) {
+                        profileTabs.forEachIndexed { index, tab ->
+                            Tab(
+                                text = {
+                                    Text(
+                                        text = stringResource(id = tab.titleId),
+                                        style = MaterialTheme.typography.body2,
+                                        color = MaterialTheme.colors.onBackground
                                     )
+                                },
+                                selected = pagerState.currentPage == index,
+                                onClick = {
+                                    coroutineScope.launch {
+                                        pagerState.animateScrollToPage(index)
+                                    }
                                 }
-                            }
-                        })
-                ) { page: Int ->
-                    profileTabs[page].content()
+                            )
+                        }
+                    }
+
+                    HorizontalPager(
+                        state = pagerState,
+                        pageCount = profileTabs.size,
+                        modifier = Modifier
+                            .fillMaxHeight()
+                            .nestedScroll(remember {
+                                object : NestedScrollConnection {
+                                    override fun onPreScroll(
+                                        available: Offset,
+                                        source: NestedScrollSource
+                                    ): Offset {
+                                        return if (available.y > 0) Offset.Zero else Offset(
+                                            x = 0f,
+                                            y = -scrollState.dispatchRawDelta(-available.y)
+                                        )
+                                    }
+                                }
+                            })
+                    ) { page: Int ->
+                        profileTabs[page].content()
+                    }
                 }
             }
         }
@@ -146,62 +152,55 @@ fun ProfileScreen(
 private fun UserPersonalInfo(
     userDetail: UserDetail,
     isCurrentUser: Boolean,
-    scrollState: ScrollState,
     modifier: Modifier = Modifier
 ) {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .verticalScroll(state = scrollState)
+    Box(
+        contentAlignment = Alignment.Center
     ) {
-        Box(
-            contentAlignment = Alignment.Center
+        val placeholder = painterResource(
+            id = if (isSystemInDarkTheme()) R.drawable.dark_image_place_holder
+            else R.drawable.light_image_place_holder
+        )
+        AsyncImage(
+            modifier = Modifier
+                .align(Alignment.TopCenter)
+                .fillMaxWidth()
+                .height(160.dp),
+            model = userDetail.profileBackground,
+            contentDescription = null,
+            placeholder = placeholder,
+            contentScale = ContentScale.Crop,
+            error = placeholder
+        )
+        Column(
+            modifier = Modifier
+                .padding(top = 80.dp)
+                .align(Alignment.TopCenter),
+            horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            val placeholder = painterResource(
-                id = if (isSystemInDarkTheme()) R.drawable.dark_image_place_holder
-                else R.drawable.light_image_place_holder
+            CircularImage(
+                imageUrl = userDetail.avatar,
+                modifier = modifier.size(150.dp),
+                placeHolder = painterResource(id = R.drawable.user_placeholder)
             )
-            AsyncImage(
-                modifier = Modifier
-                    .align(Alignment.TopCenter)
-                    .fillMaxWidth()
-                    .height(160.dp),
-                model = userDetail.profileBackground,
-                contentDescription = null,
-                placeholder = placeholder,
-                contentScale = ContentScale.Crop,
-                error = placeholder
+            Spacer(modifier = Modifier.height(LargeSpacing))
+            Text(
+                text = userDetail.fullName(),
+                style = MaterialTheme.typography.subtitle1,
             )
-            Column(
-                modifier = Modifier
-                    .padding(top = 80.dp)
-                    .align(Alignment.TopCenter),
-                horizontalAlignment = Alignment.CenterHorizontally,
-            ) {
-                CircularImage(
-                    imageUrl = userDetail.avatar,
-                    modifier = modifier.size(150.dp),
-                    placeHolder = painterResource(id = R.drawable.user_placeholder)
-                )
-                Spacer(modifier = Modifier.height(LargeSpacing))
-                Text(
-                    text = userDetail.fullName(),
-                    style = MaterialTheme.typography.subtitle1,
-                )
-                Spacer(modifier = Modifier.height(SmallSpacing))
-                if (userDetail.education != null) Text(
-                    text = userDetail.education,
-                    style = MaterialTheme.typography.body2,
-                    color = MaterialTheme.colors.secondary
-                )
-                Spacer(modifier = Modifier.height(MediumSpacing))
-                if (userDetail.bio != null) Text(
-                    text = userDetail.bio,
-                    style = MaterialTheme.typography.subtitle2,
-                )
-                Spacer(modifier = Modifier.height(ExtraLargeSpacing))
-                FollowingInfo(userDetail, isCurrentUser)
-            }
+            Spacer(modifier = Modifier.height(SmallSpacing))
+            if (userDetail.education != null) Text(
+                text = userDetail.education,
+                style = MaterialTheme.typography.body2,
+                color = MaterialTheme.colors.secondary
+            )
+            Spacer(modifier = Modifier.height(MediumSpacing))
+            if (userDetail.bio != null) Text(
+                text = userDetail.bio,
+                style = MaterialTheme.typography.subtitle2,
+            )
+            Spacer(modifier = Modifier.height(ExtraLargeSpacing))
+            FollowingInfo(userDetail, isCurrentUser)
         }
     }
 }

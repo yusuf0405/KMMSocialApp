@@ -23,9 +23,9 @@ fun Home(
         }
     }
     HomeScreen(
-        postsUiState = viewModel.postsUiStateFlow.collectAsStateWithLifecycle().value,
+        uiState = viewModel.postsUiStateFlow.collectAsStateWithLifecycle().value,
         onBoardingUiState = viewModel.onBoardingUiStateFlow.collectAsStateWithLifecycle().value,
-        fetchMoreData = viewModel::fetchMoreData,
+        fetchMoreData = viewModel::fetchUserPosts,
         actions = viewModel,
     )
 }

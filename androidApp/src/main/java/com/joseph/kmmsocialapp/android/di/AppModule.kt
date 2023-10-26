@@ -33,10 +33,10 @@ fun appModules() = listOf(appModule, toastModule, viewModelsModule)
 private val appModule = module {
     factory { AuthResultDataToUserPreferencesMapper() }
     factory<PostDomainToPostMapper> { PostDomainToPostMapperImpl(get()) }
-    factory<UserDetailDomainToUserDetailMapper> { UserDetailDomainToUserDetailMapper() }
+    factory { UserDetailDomainToUserDetailMapper() }
     factory { UserInfoDomainToUserInfoMapper() }
 
-    factory<UserDataStore> { UserDataStoreImpl(get()) }
+    single<UserDataStore> { UserDataStoreImpl(get()) }
     factory<CoroutineDispatcherProvider> { CoroutineDispatcherProviderImpl() }
 
     single<ToastDisplayFlowManager> { ToastManager() }
@@ -54,7 +54,7 @@ private val appModule = module {
 private val viewModelsModule = module {
     viewModel { LoginViewModel(get(), get(), get()) }
     viewModel { SignUpViewModel(get(), get(), get()) }
-    viewModel { HomeViewModel(get(), get(), get()) }
+    viewModel { HomeViewModel(get(), get(), get(), get(), get()) }
     viewModel { CreateViewModel(get(), get(), get(), get(), get()) }
     viewModel { PostDetailScreenViewModel() }
     viewModel { MainActivityViewModel(get(), get()) }

@@ -6,7 +6,6 @@ import android.graphics.ImageDecoder
 import android.net.Uri
 import android.os.Build
 import android.provider.MediaStore
-import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -69,7 +68,6 @@ class CreateViewModel(
             if (response.data != null) {
                 discard()
                 val result = postDomainToPostMapper.map(response.data!!)
-                Log.i("Joseph", "result = ${result}")
             }
 
             uiState = uiState.copy(

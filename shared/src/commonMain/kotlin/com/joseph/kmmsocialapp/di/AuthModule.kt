@@ -16,6 +16,7 @@ import com.joseph.kmmsocialapp.domain.repository.PostRepository
 import com.joseph.kmmsocialapp.domain.repository.UserRepository
 import com.joseph.kmmsocialapp.domain.usecases.onboarding.FetchOnboardingUsersUseCase
 import com.joseph.kmmsocialapp.domain.usecases.post.AddPostUseCase
+import com.joseph.kmmsocialapp.domain.usecases.post.FetchRecommendedPostsUseCase
 import com.joseph.kmmsocialapp.domain.usecases.post.FetchUserPostsUseCase
 import com.joseph.kmmsocialapp.domain.usecases.signin.SignInUseCase
 import com.joseph.kmmsocialapp.domain.usecases.signup.SignUpUseCase
@@ -36,6 +37,7 @@ private val postModule = module {
     factory { PostService() }
     factory { AddPostUseCase() }
     factory { FetchUserPostsUseCase() }
+    factory { FetchRecommendedPostsUseCase() }
 }
 
 private val usersModule = module {

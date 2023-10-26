@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.map
 
+
 class UserDataStoreImpl(
     private val dataStore: DataStore<UserPreferences>
 ) : UserDataStore {
@@ -31,7 +32,7 @@ class UserDataStoreImpl(
 
     override suspend fun fetchUserId(): Int {
         val userId = dataStore.data.firstOrNull()?.id
-        return if (userId == null) {
+        return if (userId == null || userId == -1) {
             loginOutFlow.tryEmit(true)
             -1
         } else userId

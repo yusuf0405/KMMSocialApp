@@ -4,11 +4,14 @@ import com.joseph.kmmsocialapp.common.data.BASE_URL
 import com.joseph.kmmsocialapp.common.data.KtorApi
 import com.joseph.kmmsocialapp.data.models.AddPostResponse
 import com.joseph.kmmsocialapp.data.models.PostListResponse
+import com.joseph.kmmsocialapp.data.models.RecommendedPostsParam
 import io.ktor.client.call.body
 import io.ktor.client.plugins.onUpload
 import io.ktor.client.request.forms.formData
 import io.ktor.client.request.forms.submitFormWithBinaryData
 import io.ktor.client.request.get
+import io.ktor.client.request.post
+import io.ktor.client.request.setBody
 import io.ktor.http.Headers
 import io.ktor.http.HttpHeaders
 
@@ -39,5 +42,12 @@ internal class PostService : KtorApi() {
 
     suspend fun fetchUserPosts(userId: Int): PostListResponse = client.get {
         endPoint(path = "/post/list/${userId}")
+    }.body()
+
+    suspend fun fetchRecommendedPosts(
+        params: RecommendedPostsParam
+    ): PostListResponse = client.post {
+        endPoint(path = "/post/recommended")
+        setBody(params)
     }.body()
 }

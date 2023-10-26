@@ -12,4 +12,10 @@ internal interface PostRepository {
     ): Result<PostDomain>
 
     suspend fun fetchUserPosts(userId: Int): Result<List<PostDomain>>
+
+    suspend fun fetchRecommendedPosts(
+        page: Int,
+        pageSize: Int,
+        userId: Int
+    ): Result<List<PostDomain>>
 }
